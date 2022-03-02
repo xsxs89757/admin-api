@@ -20,6 +20,16 @@ composer qifen/helper
 
  (4) 配置 `config/redis` 配置
 
+ (5) 修改 `config/exception.php` 配置   
+    ```php
+        use Qifen\Admin\exception\Handler;
+
+        return [
+            '' => support\exception\Handler::class,
+            'Admin' => Handler::class,
+        ];
+    ```
+
 # 接口
 
 ```php
