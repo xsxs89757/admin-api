@@ -6,7 +6,7 @@
     "workerman/webman-framework": "^1.2.1",
     "qifen/route": "^1.0",
     "qifen/jwt": "^1.2",
-    "qifen/casbin": "^1.9",
+    "qifen/casbin": "^2.0",
     "qifen/webman-api-response": "^1.0",
     "qifen/helpers": "^1.0",
     "qifen/phinx": "^1.2"
