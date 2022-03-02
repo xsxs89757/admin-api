@@ -50,7 +50,7 @@ class AdminMenu extends Model {
      *
      * @param bool $withHandle
      * @return array
-     * @throws \app\exception\UnauthorizedException
+     * @throws \Qifen\Admin\exception\UnauthorizedException
      */
     public static function getRoleMenu(bool $withHandle = true) {
         $uid = AdminUser::getCurrentUserId();

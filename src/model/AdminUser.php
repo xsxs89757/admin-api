@@ -4,7 +4,7 @@ namespace Qifen\Admin\model;
 
 use support\Model;
 use Qifen\Jwt\JwtToken;
-use app\exception\UnauthorizedException;
+use Qifen\Admin\exception\UnauthorizedException;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class AdminUser extends Model {

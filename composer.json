@@ -4,6 +4,7 @@
   "license": "MIT",
   "require": {
     "workerman/webman-framework": "^1.2.1",
+    "workerman/validation": "^3.0",
     "qifen/route": "^1.0",
     "qifen/jwt": "^1.2",
     "qifen/casbin": "^2.0",

@@ -4,7 +4,7 @@ namespace Qifen\Admin\controller;
 
 use Qifen\WebmanApiResponse\Code;
 use Qifen\WebmanApiResponse\ApiResponse;
-use app\exception\ApiErrorException;
+use Qifen\Admin\exception\ApiErrorException;
 use Respect\Validation\Exceptions\ValidationException;
 use Respect\Validation\Validator;
 use support\Request;

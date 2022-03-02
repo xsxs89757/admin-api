@@ -5,7 +5,7 @@ namespace Qifen\Admin\controller;
 use Qifen\Admin\model\AdminMenu;
 use Qifen\Admin\model\AdminUser;
 use Qifen\Admin\model\Roles;
-use app\exception\ApiErrorException;
+use Qifen\Admin\exception\ApiErrorException;
 use Qifen\helpers\Bcrypt;
 use Qifen\Jwt\JwtToken;
 use support\Redis;
@@ -74,7 +74,7 @@ class AuthController extends Base {
      * 获取当前登录用户信息
      *
      * @return \support\Response
-     * @throws \app\exception\UnauthorizedException
+     * @throws \Qifen\Admin\exception\UnauthorizedException
      */
     public function me() {
         $user = AdminUser::getCurrentUser();
@@ -106,7 +106,7 @@ class AuthController extends Base {
      * 获取当前用户菜单
      *
      * @return \support\Response
-     * @throws \app\exception\UnauthorizedException
+     * @throws \Qifen\Admin\exception\UnauthorizedException
      */
     public function menu() {
         $menus = AdminMenu::getRoleMenu();
@@ -118,7 +118,7 @@ class AuthController extends Base {
      * 获取当前用户权限
      *
      * @return \support\Response
-     * @throws \app\exception\UnauthorizedException
+     * @throws \Qifen\Admin\exception\UnauthorizedException
      */
     public function permissions() {
         $permissions = Roles::getCurrentUserRules();

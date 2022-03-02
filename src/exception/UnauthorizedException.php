@@ -1,6 +1,6 @@
 <?php
 
-namespace app\exception;
+namespace Qifen\Admin\exception;
 
 use Qifen\WebmanApiResponse\Code;
 use Exception;

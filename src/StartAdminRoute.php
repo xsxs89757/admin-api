@@ -7,6 +7,7 @@ use Qifen\Route\Route as AdminRoute;
 use Qifen\Admin\middleware\Auth;
 use Qifen\Admin\middleware\ActionLog;
 use Qifen\Admin\middleware\Access;
+use Qifen\Admin\middleware\Cors;
 
 class StartAdminRoute{
     public static function start(){
@@ -14,7 +15,7 @@ class StartAdminRoute{
          * 跨域
          */
         Route::options('/admin/{path:.+}' , function() {return response('');})->middleware([
-            app\admin\middleware\Cors::class
+            Cors::class
         ]);
 
         /**

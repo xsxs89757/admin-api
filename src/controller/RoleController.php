@@ -24,8 +24,8 @@ class RoleController extends Base {
      *
      * @param Request $request
      * @return \support\Response
-     * @throws \app\exception\ApiErrorException
-     * @throws \app\exception\UnauthorizedException
+     * @throws \Qifen\Admin\exception\ApiErrorException
+     * @throws \Qifen\Admin\exception\UnauthorizedException
      */
     public function list(Request $request) {
         $params = $this->getPageParams($request);
@@ -50,7 +50,7 @@ class RoleController extends Base {
      * @param Request $request
      * @param int $id
      * @return \support\Response
-     * @throws \app\exception\ApiErrorException
+     * @throws \Qifen\Admin\exception\ApiErrorException
      */
     public function detail(Request $request, int $id) {
         $detail = Roles::detail($id);
@@ -63,8 +63,8 @@ class RoleController extends Base {
      *
      * @param Request $request
      * @return \support\Response
-     * @throws \app\exception\ApiErrorException
-     * @throws \app\exception\UnauthorizedException
+     * @throws \Qifen\Admin\exception\ApiErrorException
+     * @throws \Qifen\Admin\exception\UnauthorizedException
      */
     public function create(Request $request) {
         $name = $request->input('name');
@@ -87,8 +87,8 @@ class RoleController extends Base {
      * @param int $id
      * @return \support\Response
      * @throws \Throwable
-     * @throws \app\exception\ApiErrorException
-     * @throws \app\exception\UnauthorizedException
+     * @throws \Qifen\Admin\exception\ApiErrorException
+     * @throws \Qifen\Admin\exception\UnauthorizedException
      */
     public function edit(Request $request, int $id) {
         $name = $request->input('name');
@@ -110,7 +110,7 @@ class RoleController extends Base {
      * @param Request $request
      * @param int $id
      * @return \support\Response
-     * @throws \app\exception\ApiErrorException
+     * @throws \Qifen\Admin\exception\ApiErrorException
      */
     public function del(Request $request, int $id) {
         Roles::del($id);
