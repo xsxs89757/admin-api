@@ -1,12 +1,12 @@
 <?php
 
-namespace Qifen\admin;
+namespace Qifen\Admin;
 
 use Webman\Route;
 use Qifen\Route\Route as AdminRoute;
-use Qifen\admin\middleware\Auth;
-use Qifen\admin\middleware\ActionLog;
-use Qifen\admin\middleware\Access;
+use Qifen\Admin\middleware\Auth;
+use Qifen\Admin\middleware\ActionLog;
+use Qifen\Admin\middleware\Access;
 
 class StartAdminRoute{
     public static function start(){

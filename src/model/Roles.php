@@ -1,6 +1,6 @@
 <?php
 
-namespace Qifen\admin\model;
+namespace Qifen\Admin\model;
 
 use app\exception\ApiErrorException;
 use Qifen\Casbin\Permission;

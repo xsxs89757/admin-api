@@ -1,6 +1,6 @@
 <?php
 
-namespace Qifen\admin\model;
+namespace Qifen\Admin\model;
 
 use support\Model;
 use Qifen\Jwt\JwtToken;

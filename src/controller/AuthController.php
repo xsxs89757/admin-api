@@ -1,10 +1,10 @@
 <?php
 
-namespace app\admin\controller;
+namespace Qifen\Admin\controller;
 
-use Qifen\admin\model\AdminMenu;
-use Qifen\admin\model\AdminUser;
-use Qifen\admin\model\Roles;
+use Qifen\Admin\model\AdminMenu;
+use Qifen\Admin\model\AdminUser;
+use Qifen\Admin\model\Roles;
 use app\exception\ApiErrorException;
 use Qifen\helpers\Bcrypt;
 use Qifen\Jwt\JwtToken;

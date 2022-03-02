@@ -1,6 +1,6 @@
 <?php
 
-namespace Qifen\admin\controller;
+namespace Qifen\Admin\controller;
 
 use Qifen\WebmanApiResponse\Code;
 use Qifen\WebmanApiResponse\ApiResponse;

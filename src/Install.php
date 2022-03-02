@@ -1,5 +1,5 @@
 <?php
-namespace Qifen\admin;
+namespace Qifen\Admin;
 
 class Install
 {
