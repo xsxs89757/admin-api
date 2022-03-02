@@ -64,10 +64,12 @@ class Install
             if (!is_dir($path) && !is_file($path)) {
                 continue;
             }
-            /*if (is_link($path) {
+            if (is_link($path)) {
                 unlink($path);
-            }*/
-            remove_dir($path);
+            }else{
+                remove_dir($path);
+            }   
+            
         }
     }
     
