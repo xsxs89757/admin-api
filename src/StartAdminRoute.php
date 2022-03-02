@@ -20,7 +20,7 @@ class StartAdminRoute{
         /**
          * 后台登录
          */
-        AdminRoute::post('/admin/login', 'Qifen\admin\controller\AuthController@login')->middleware([
+        AdminRoute::post('/admin/login', 'Qifen\Admin\controller\AuthController@login')->middleware([
             ActionLog::class,
         ])->rule('login');
 
@@ -28,10 +28,10 @@ class StartAdminRoute{
          * 后台公共路由
          */
         AdminRoute::group('/admin', function () {
-            AdminRoute::get('/logout', 'Qifen\admin\controller\AuthController@logout')->rule('logout');
-            AdminRoute::get('/me', 'Qifen\admin\controller\AuthController@me')->rule('userInfo');
-            AdminRoute::get('/menu', 'Qifen\admin\controller\AuthController@menu')->rule('menu');
-            AdminRoute::get('/permissions', 'Qifen\admin\controller\AuthController@permissions')->rule('permissions');
+            AdminRoute::get('/logout', 'Qifen\Admin\controller\AuthController@logout')->rule('logout');
+            AdminRoute::get('/me', 'Qifen\Admin\controller\AuthController@me')->rule('userInfo');
+            AdminRoute::get('/menu', 'Qifen\Admin\controller\AuthController@menu')->rule('menu');
+            AdminRoute::get('/permissions', 'Qifen\Admin\controller\AuthController@permissions')->rule('permissions');
         })->middleware([
             Auth::class,
             ActionLog::class,
@@ -41,12 +41,12 @@ class StartAdminRoute{
          * 后台权限路由
          */
         AdminRoute::group('/admin', function () {
-            AdminRoute::get('/menus','Qifen\admin\controller\RoleController@menuTree')->rule('adminUsers.role');
-            AdminRoute::get('/role','Qifen\admin\controller\RoleController@list')->rule('adminUsers.role');
-            AdminRoute::get('/role/{id:\d+}','Qifen\admin\controller\RoleController@detail')->rule('adminUsers.role');
-            AdminRoute::post('/role','Qifen\admin\controller\RoleController@create')->rule('adminUsers.role.addRole');
-            AdminRoute::put('/role/{id:\d+}','Qifen\admin\controller\RoleController@edit')->rule('adminUsers.role.editRole');
-            AdminRoute::delete('/role/{id:\d+}','Qifen\admin\controller\RoleController@del')->rule('adminUsers.role.deleteRole');
+            AdminRoute::get('/menus','Qifen\Admin\controller\RoleController@menuTree')->rule('adminUsers.role');
+            AdminRoute::get('/role','Qifen\Admin\controller\RoleController@list')->rule('adminUsers.role');
+            AdminRoute::get('/role/{id:\d+}','Qifen\Admin\controller\RoleController@detail')->rule('adminUsers.role');
+            AdminRoute::post('/role','Qifen\Admin\controller\RoleController@create')->rule('adminUsers.role.addRole');
+            AdminRoute::put('/role/{id:\d+}','Qifen\Admin\controller\RoleController@edit')->rule('adminUsers.role.editRole');
+            AdminRoute::delete('/role/{id:\d+}','Qifen\Admin\controller\RoleController@del')->rule('adminUsers.role.deleteRole');
         })->middleware([
             Auth::class,
             ActionLog::class,
