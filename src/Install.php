@@ -1,5 +1,5 @@
 <?php
-namespace Qifen\Admin;
+namespace Qifen\WebmanAdmin;
 
 class Install
 {

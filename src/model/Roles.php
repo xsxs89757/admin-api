@@ -1,8 +1,8 @@
 <?php
 
-namespace Qifen\Admin\model;
+namespace Qifen\WebmanAdmin\model;
 
-use Qifen\Admin\exception\ApiErrorException;
+use Qifen\WebmanAdmin\exception\ApiErrorException;
 use Qifen\Casbin\Permission;
 use support\Model;
 
@@ -38,7 +38,7 @@ class Roles extends Model {
      * 获取当前登录用户权限
      *
      * @return array
-     * @throws \Qifen\Admin\exception\UnauthorizedException
+     * @throws \Qifen\WebmanAdmin\exception\UnauthorizedException
      */
     public static function getCurrentUserRules() {
         $uid = AdminUser::getCurrentUserId();
@@ -64,7 +64,7 @@ class Roles extends Model {
      *
      * @param array $permissions
      * @return bool
-     * @throws \Qifen\Admin\exception\UnauthorizedException
+     * @throws \Qifen\WebmanAdmin\exception\UnauthorizedException
      */
     public static function checkUserPermissions(array $permissions) {
         if (empty($permissions)) return true;
@@ -158,7 +158,7 @@ class Roles extends Model {
      */
     public static function del(int $id) {
         try {
-            $count = AdminModelHasRoles::where('role_id', $id)->where('model_type', 'Qifen\Admin\model\AdminUser')->count();
+            $count = AdminModelHasRoles::where('role_id', $id)->where('model_type', 'Qifen\WebmanAdmin\model\AdminUser')->count();
 
             if ($count > 0) {
                 throw new ApiErrorException('当前角色已分配给用户，无法删除');

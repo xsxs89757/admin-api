@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'Admin' => [
-        Qifen\Admin\middleware\Cors::class,
+    'WebmanAdmin' => [
+        Qifen\WebmanAdmin\middleware\Cors::class,
     ],
 ];

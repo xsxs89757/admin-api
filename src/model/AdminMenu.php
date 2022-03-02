@@ -1,6 +1,6 @@
 <?php
 
-namespace Qifen\Admin\model;
+namespace Qifen\WebmanAdmin\model;
 
 use Qifen\Casbin\Permission;
 use support\Model;
@@ -50,7 +50,7 @@ class AdminMenu extends Model {
      *
      * @param bool $withHandle
      * @return array
-     * @throws \Qifen\Admin\exception\UnauthorizedException
+     * @throws \Qifen\WebmanAdmin\exception\UnauthorizedException
      */
     public static function getRoleMenu(bool $withHandle = true) {
         $uid = AdminUser::getCurrentUserId();

@@ -1,6 +1,6 @@
 <?php
 
-namespace Qifen\Admin\middleware;
+namespace Qifen\WebmanAdmin\middleware;
 
 use Qifen\WebmanApiResponse\ApiResponse;
 use Qifen\WebmanApiResponse\Code;

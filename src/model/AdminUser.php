@@ -1,10 +1,10 @@
 <?php
 
-namespace Qifen\Admin\model;
+namespace Qifen\WebmanAdmin\model;
 
 use support\Model;
 use Qifen\Jwt\JwtToken;
-use Qifen\Admin\exception\UnauthorizedException;
+use Qifen\WebmanAdmin\exception\UnauthorizedException;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class AdminUser extends Model {

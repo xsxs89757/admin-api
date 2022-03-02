@@ -1,10 +1,10 @@
 <?php
 
-namespace Qifen\Admin\controller;
+namespace Qifen\WebmanAdmin\controller;
 
 use Qifen\WebmanApiResponse\Code;
 use Qifen\WebmanApiResponse\ApiResponse;
-use Qifen\Admin\exception\ApiErrorException;
+use Qifen\WebmanAdmin\exception\ApiErrorException;
 use Respect\Validation\Exceptions\ValidationException;
 use Respect\Validation\Validator;
 use support\Request;

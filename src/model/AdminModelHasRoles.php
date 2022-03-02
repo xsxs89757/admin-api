@@ -1,6 +1,6 @@
 <?php
 
-namespace Qifen\Admin\model;
+namespace Qifen\WebmanAdmin\model;
 
 use support\Model;
 

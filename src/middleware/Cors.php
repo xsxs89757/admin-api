@@ -1,6 +1,6 @@
 <?php
 
-namespace Qifen\Admin\middleware;
+namespace Qifen\WebmanAdmin\middleware;
 
 use Webman\Http\Request;
 use Webman\Http\Response;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Qifen\Admin\middleware;
+namespace Qifen\WebmanAdmin\middleware;
 
-use Qifen\Admin\model\AdminUser;
-use Qifen\Admin\model\Roles;
+use Qifen\WebmanAdmin\model\AdminUser;
+use Qifen\WebmanAdmin\model\Roles;
 use Qifen\Route\Route;
 use Qifen\WebmanApiResponse\ApiResponse;
 use Qifen\WebmanApiResponse\Code;

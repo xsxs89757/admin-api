@@ -9,6 +9,7 @@ composer qifen/phinx
 composer qifen/route
 composer qifen/casbin
 composer qifen/helper
+composer workerman/validation
 ```
 ### 数据库配置
 
@@ -21,14 +22,14 @@ composer qifen/helper
  (4) 配置 `config/redis` 配置
 
  (5) 修改 `config/exception.php` 配置   
-    ```php
-        use Qifen\Admin\exception\Handler;
+ ```php
+        use Qifen\WebmanAdmin\exception\Handler;
 
         return [
             '' => support\exception\Handler::class,
-            'Admin' => Handler::class,
+            'WebmanAdmin' => Handler::class,
         ];
-    ```
+```
 
 # 接口
 

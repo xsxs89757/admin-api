@@ -1,10 +1,10 @@
 <?php
 
-namespace Qifen\Admin\controller;
+namespace Qifen\WebmanAdmin\controller;
 
-use Qifen\Admin\model\AdminMenu;
-use Qifen\Admin\model\AdminUser;
-use Qifen\Admin\model\Roles;
+use Qifen\WebmanAdmin\model\AdminMenu;
+use Qifen\WebmanAdmin\model\AdminUser;
+use Qifen\WebmanAdmin\model\Roles;
 use support\Request;
 use Respect\Validation\Validator as v;
 
@@ -24,8 +24,8 @@ class RoleController extends Base {
      *
      * @param Request $request
      * @return \support\Response
-     * @throws \Qifen\Admin\exception\ApiErrorException
-     * @throws \Qifen\Admin\exception\UnauthorizedException
+     * @throws \Qifen\WebmanAdmin\exception\ApiErrorException
+     * @throws \Qifen\WebmanAdmin\exception\UnauthorizedException
      */
     public function list(Request $request) {
         $params = $this->getPageParams($request);
@@ -50,7 +50,7 @@ class RoleController extends Base {
      * @param Request $request
      * @param int $id
      * @return \support\Response
-     * @throws \Qifen\Admin\exception\ApiErrorException
+     * @throws \Qifen\WebmanAdmin\exception\ApiErrorException
      */
     public function detail(Request $request, int $id) {
         $detail = Roles::detail($id);
@@ -63,8 +63,8 @@ class RoleController extends Base {
      *
      * @param Request $request
      * @return \support\Response
-     * @throws \Qifen\Admin\exception\ApiErrorException
-     * @throws \Qifen\Admin\exception\UnauthorizedException
+     * @throws \Qifen\WebmanAdmin\exception\ApiErrorException
+     * @throws \Qifen\WebmanAdmin\exception\UnauthorizedException
      */
     public function create(Request $request) {
         $name = $request->input('name');
@@ -87,8 +87,8 @@ class RoleController extends Base {
      * @param int $id
      * @return \support\Response
      * @throws \Throwable
-     * @throws \Qifen\Admin\exception\ApiErrorException
-     * @throws \Qifen\Admin\exception\UnauthorizedException
+     * @throws \Qifen\WebmanAdmin\exception\ApiErrorException
+     * @throws \Qifen\WebmanAdmin\exception\UnauthorizedException
      */
     public function edit(Request $request, int $id) {
         $name = $request->input('name');
@@ -110,7 +110,7 @@ class RoleController extends Base {
      * @param Request $request
      * @param int $id
      * @return \support\Response
-     * @throws \Qifen\Admin\exception\ApiErrorException
+     * @throws \Qifen\WebmanAdmin\exception\ApiErrorException
      */
     public function del(Request $request, int $id) {
         Roles::del($id);
