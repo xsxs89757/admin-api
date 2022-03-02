@@ -13,7 +13,8 @@ class Install
         'exception/ApiErrorException.php'       => 'exception/ApiErrorException.php',
         'exception/Handler.php'                 => 'exception/Handler.php',
         'exception/UnauthorizedException.php'   => 'exception/UnauthorizedException.php',
-        'app/admin/controller/Base.php'         => 'app/admin/controller/Base.php'
+        'app/admin/controller/Base.php'         => 'app/admin/controller/Base.php',
+        'database/migrations/20210000000001_create_admin_center.php' => 'database/migrations/20210000000001_create_admin_center.php'
     );
 
     /**
