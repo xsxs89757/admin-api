@@ -125,4 +125,32 @@ class AuthController extends Base {
 
         return $this->success($permissions);
     }
+
+    /**
+     * 修改密码
+     * 
+     * @param Request $request
+     * @return \support\Response
+     * @throws ApiErrorException
+     * @throws \Qifen\WebmanAdmin\exception\UnauthorizedException
+     */
+    public function resetPassword(Request $request) {
+        $oldPassword = $request->input('oldPassword');
+        $password = $request->input('password');
+
+        $this->validateParams(compact('oldPassword', 'password'), [
+            'oldPassword' => v::stringType()->length(8, 20),
+            'password' => v::stringType()->length(8, 20),
+        ]);
+
+        $user = AdminUser::getCurrentUser();
+
+        if (!Bcrypt::checkPassword($oldPassword, $user->password)) {
+            return $this->error('原密码错误');
+        }
+
+        $user->password = Bcrypt::hashPassword($password);
+
+        return $this->successOrError($user->save());
+    }
 }

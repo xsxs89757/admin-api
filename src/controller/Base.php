@@ -55,6 +55,17 @@ class Base {
     }
 
     /**
+     * 验证ID并返回错误
+     *
+     * @param $id
+     * @return bool
+     * @throws ApiErrorException
+     */
+    protected function validateIdWithResponse($id) {
+        return $this->validateId($id, true);
+    }
+
+    /**
      * 获取分页大小
      *
      * @param Request $request

@@ -117,4 +117,16 @@ class RoleController extends Base {
 
         return $this->success();
     }
+
+    /**
+     * 获取当前用户的所有角色
+     *
+     * @return \support\Response
+     * @throws \Qifen\WebmanAdmin\exception\UnauthorizedException
+     */
+    public function allRoles() {
+        $list = Roles::getCurrentUserRoles('list');
+
+        return $this->success($list);
+    }
 }

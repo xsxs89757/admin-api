@@ -10,7 +10,7 @@ use Qifen\WebmanAdmin\middleware\Access;
 use Qifen\WebmanAdmin\middleware\Cors;
 
 class StartAdminRoute{
-    public static function start(){
+    public static function start() {
         /**
          * 跨域
          */
@@ -33,6 +33,8 @@ class StartAdminRoute{
             AdminRoute::get('/me', 'Qifen\WebmanAdmin\controller\AuthController@me')->rule('userInfo');
             AdminRoute::get('/menu', 'Qifen\WebmanAdmin\controller\AuthController@menu')->rule('menu');
             AdminRoute::get('/permissions', 'Qifen\WebmanAdmin\controller\AuthController@permissions')->rule('permissions');
+            AdminRoute::post('/reset_password','Qifen\WebmanAdmin\controller\AuthController@resetPassword')->rule('resetPassword');
+            AdminRoute::get('/menu_cache_clear','Qifen\WebmanAdmin\controller\UserController@clearMenuCache')->rule('clearMenuCache');
         })->middleware([
             Auth::class,
             ActionLog::class,
@@ -48,11 +50,19 @@ class StartAdminRoute{
             AdminRoute::post('/role','Qifen\WebmanAdmin\controller\RoleController@create')->rule('adminUsers.role.addRole');
             AdminRoute::put('/role/{id:\d+}','Qifen\WebmanAdmin\controller\RoleController@edit')->rule('adminUsers.role.editRole');
             AdminRoute::delete('/role/{id:\d+}','Qifen\WebmanAdmin\controller\RoleController@del')->rule('adminUsers.role.deleteRole');
+
+            AdminRoute::get('/roles','Qifen\WebmanAdmin\controller\RoleController@allRoles')->rule('adminUsers.list');
+            AdminRoute::get('/user','Qifen\WebmanAdmin\controller\UserController@list')->rule('adminUsers.list');
+            AdminRoute::post('/user','Qifen\WebmanAdmin\controller\UserController@create')->rule('adminUsers.list.addAdminUser');
+            AdminRoute::put('/user/{id:\d+}','Qifen\WebmanAdmin\controller\UserController@edit')->rule('adminUsers.list.editAdminUser');
+            AdminRoute::delete('/user/{id:\d+}','Qifen\WebmanAdmin\controller\UserController@del')->rule('adminUsers.list.deleteAdminUser');
+
+            AdminRoute::get('/logs','Qifen\WebmanAdmin\controller\UserController@logs')->rule('adminControllerLogs');
+            AdminRoute::post('/logs_clear','Qifen\WebmanAdmin\controller\UserController@clearLogs')->rule('adminControllerLogs.clearAdminLogs');
         })->middleware([
             Auth::class,
             ActionLog::class,
             Access::class,
         ]);
     }
-} 
-
+}

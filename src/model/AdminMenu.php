@@ -4,8 +4,13 @@ namespace Qifen\WebmanAdmin\model;
 
 use Qifen\Casbin\Permission;
 use support\Model;
+use support\Redis;
 
 class AdminMenu extends Model {
+    const CACHE_MENU_KEY = 'all_menus';
+
+    const STATIC_MENU = ['login' => '登录', 'resetPassword' => '修改密码'];
+    
     const DASHBOARD = [
         'path' => '/',
         'component' => 'LAYOUT',
@@ -142,5 +147,110 @@ class AdminMenu extends Model {
             'redirect' => $line['redirect'],
             'meta' => $meta,
         ];
+    }
+
+    /**
+     * 清空菜单缓存
+     * 
+     * @return void
+     */
+    public static function clearCache() {
+        Redis::del(self::CACHE_MENU_KEY);
+    }
+
+    /**
+     * 获取全部菜单
+     * 
+     * @param string $index
+     * @return array|mixed
+     */
+    public static function getAllMenu(string $index) {
+        $menus = Redis::get(self::CACHE_MENU_KEY);
+
+        if (!$menus) {
+            $list = self::orderBy('sort', 'asc')
+                ->orderBy('id', 'asc')
+                ->get()
+                ->toArray();
+
+            $k = [];
+            $id = [];
+            $parent = [];
+            $children = [];
+
+            foreach ($list as $item) {
+                if ($item['pid'] == 0) {
+                    $parent[$item['id']] = $item;
+                } else {
+                    $children[$item['pid']][] = $item;
+                }
+
+                $k[$item['key']] = $item;
+                $id[$item['id']] = $item;
+            }
+
+            $menus = compact('k', 'id', 'parent', 'children');
+
+            Redis::set(self::CACHE_MENU_KEY, json_encode($menus));
+        } else {
+            $menus = json_decode($menus, true);
+        }
+
+        return empty($index) ? $menus : $menus[$index];
+    }
+
+    /**
+     * 获取完整路径
+     * 
+     * @param string $key
+     * @return array
+     */
+    public static function getFullPathName(string $key) {
+        $path = [];
+
+        $keys = self::getAllMenu('k');
+
+        if (array_key_exists($key, $keys)) {
+            $item = $keys[$key];
+
+            $path[] = $item['introduction'];
+
+            if ($item['pid'] !== 0) {
+                $parent = self::getParentPathName($item['pid']);
+                $path = array_merge($path, $parent);
+            }
+
+            $path = array_reverse($path);
+        } else if (isset(self::STATIC_MENU[$key])) {
+            $path[] = self::STATIC_MENU[$key];
+        } else {
+            $path[] = '上传文件{' . $key . '}';
+        }
+
+        return $path;
+    }
+
+    /**
+     * 获取所有父节点名称
+     * 
+     * @param int $id
+     * @return array
+     */
+    private static function getParentPathName(int $id) {
+        $path = [];
+
+        $ids = self::getAllMenu('id');
+
+        if (array_key_exists($id, $ids)) {
+            $item = $ids[$id];
+            $path[] = $item['introduction'];
+
+            if ($item['pid'] !== 0) {
+                $parent = self::getParentPathName($item['pid']);
+                $path = array_merge($path, $parent);
+            }
+        }
+
+        return $path;
     }
 }

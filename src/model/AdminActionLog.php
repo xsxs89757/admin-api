@@ -19,4 +19,13 @@ class AdminActionLog extends Model {
     protected function serializeDate(\DateTimeInterface $date) {
         return $date->format($this->dateFormat ?: 'Y-m-d H:i:s');
     }
+
+    /**
+     * 操作人
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function operator() {
+        return $this->belongsTo(AdminUser::class, 'action_uid');
+    }
 }

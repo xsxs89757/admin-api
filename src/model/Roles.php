@@ -83,6 +83,71 @@ class Roles extends Model {
     }
 
     /**
+     * 获取当前用户创建和拥有的角色
+     *
+     * @param string $type
+     * @return mixed
+     * @throws \Qifen\WebmanAdmin\exception\UnauthorizedException
+     */
+    public static function getCurrentUserRoles(string $type = 'id') {
+        $uid = AdminUser::getCurrentUserId();
+
+        if ($uid == 1) {
+            if ($type === 'id') {
+                return self::pluck('id')->toArray();
+            } else {
+                return self::select(['id', 'name'])->get()->toArray();
+            }
+        }
+
+        $ownIds = AdminModelHasRoles::where('model_id', $uid)
+            ->where('model_type', 'app\admin\model\AdminUser')
+            ->pluck('role_id')
+            ->toArray();
+
+        if ($type === 'id') {
+            $createIds = self::where('create_uid', $uid)
+                ->pluck('id')
+                ->toArray();
+
+            return array_merge($createIds, $ownIds);
+        } else {
+            $createRoles = self::select(['id', 'name'])
+                ->where('create_uid', $uid)
+                ->get()
+                ->toArray();
+
+            $ownRoles = self::select(['id', 'name'])
+                ->whereIn('id', $ownIds)
+                ->get()
+                ->toArray();
+
+            return array_merge($createRoles, $ownRoles);
+        }
+    }
+
+    /**
+     * 检查用户是否有角色
+     *
+     * @param array $roles
+     * @return bool
+     * @throws \Qifen\WebmanAdmin\exception\UnauthorizedException
+     */
+    public static function checkUserRoles(array $roles) {
+        if (empty($roles)) return true;
+
+        $allRoles = self::getCurrentUserRoles();
+
+        foreach ($roles as $role) {
+            if (!in_array($role, $allRoles)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * 角色详情
      *
      * @param int $id
