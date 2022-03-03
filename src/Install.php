@@ -12,8 +12,8 @@ class Install
         'config/plugin/qifen/admin'             => 'config/plugin/qifen/admin',
         'app/admin/controller/Base.php'         => 'app/admin/controller/Base.php',
         'database/migrations/20210000000001_create_admin_center.php' => 'database/migrations/20210000000001_create_admin_center.php',
-        'database/seeds/AdminUserSeeder.php' => 'database/migrations/AdminUserSeeder.php',
-        'database/seeds/RuleSeeder.php' => 'database/migrations/RuleSeeder.php',
+        'database/seeds/AdminUserSeeder.php' => 'database/seeds/AdminUserSeeder.php',
+        'database/seeds/RuleSeeder.php' => 'database/seeds/RuleSeeder.php',
     );
 
     /**
