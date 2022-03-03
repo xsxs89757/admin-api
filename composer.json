@@ -10,7 +10,8 @@
     "qifen/casbin": "^2.0",
     "qifen/webman-api-response": "^1.0",
     "qifen/helpers": "^1.0",
-    "qifen/phinx": "^1.2"
+    "qifen/phinx": "^1.2",
+    "illuminate/redis": "^8.83"
   },
   "autoload": {
     "psr-4": {
