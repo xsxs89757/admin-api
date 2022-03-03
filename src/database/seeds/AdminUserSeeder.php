@@ -1,7 +1,7 @@
 <?php
 
 
-use app\helpers\Bcrypt;
+use Qifen\helpers\Bcrypt;
 use Phinx\Seed\AbstractSeed;
 
 class AdminUserSeeder extends AbstractSeed {
