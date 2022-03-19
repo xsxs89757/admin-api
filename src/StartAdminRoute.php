@@ -35,6 +35,8 @@ class StartAdminRoute{
             AdminRoute::get('/permissions', 'Qifen\WebmanAdmin\controller\AuthController@permissions')->rule('permissions');
             AdminRoute::post('/reset_password','Qifen\WebmanAdmin\controller\AuthController@resetPassword')->rule('resetPassword');
             AdminRoute::get('/menu_cache_clear','Qifen\WebmanAdmin\controller\UserController@clearMenuCache')->rule('clearMenuCache');
+            AdminRoute::get('/config_map','Qifen\WebmanAdmin\controller\ConfigController@getMap')->rule('configMap');
+            AdminRoute::post('/upload','Qifen\WebmanAdmin\controller\UploadController@upload')->rule('upload');
         })->middleware([
             Auth::class,
             ActionLog::class,
@@ -44,6 +46,16 @@ class StartAdminRoute{
          * 后台权限路由
          */
         AdminRoute::group('/admin', function () {
+            AdminRoute::get('/config_set','Qifen\WebmanAdmin\controller\ConfigController@configList')->rule('system.configSet');
+            AdminRoute::post('/config_set','Qifen\WebmanAdmin\controller\ConfigController@configCreate')->rule('system.configSet');
+            AdminRoute::post('/config_set/sort','Qifen\WebmanAdmin\controller\ConfigController@configSort')->rule('system.configSet');
+            AdminRoute::put('/config_set/{id:\d+}','Qifen\WebmanAdmin\controller\ConfigController@configEdit')->rule('system.configSet');
+            AdminRoute::delete('/config_set/{id:\d+}','Qifen\WebmanAdmin\controller\ConfigController@configDel')->rule('system.configSet');
+
+            AdminRoute::get('/config/group','Qifen\WebmanAdmin\controller\ConfigController@configGroup')->rule('system.config');
+            AdminRoute::get('/config','Qifen\WebmanAdmin\controller\ConfigController@configListByGroup')->rule('system.config');
+            AdminRoute::post('/config','Qifen\WebmanAdmin\controller\ConfigController@configBatchStore')->rule('system.config.store');
+
             AdminRoute::get('/menus','Qifen\WebmanAdmin\controller\RoleController@menuTree')->rule('adminUsers.role');
             AdminRoute::get('/role','Qifen\WebmanAdmin\controller\RoleController@list')->rule('adminUsers.role');
             AdminRoute::get('/role/{id:\d+}','Qifen\WebmanAdmin\controller\RoleController@detail')->rule('adminUsers.role');

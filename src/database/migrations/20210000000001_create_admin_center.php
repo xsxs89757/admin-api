@@ -82,5 +82,22 @@ final class CreateAdminCenter extends AbstractMigration
             ->addColumn('model_id', 'string', ['comment' => '模型id'])
             ->addIndex(['model_id', 'model_type'])
             ->create();
+
+        // 系统设置
+        $systemConfig = $this->table('system_config', ['signed' => false]);
+        $systemConfig->addColumn('name', 'string', ['comment' => '配置名称'])
+            ->addColumn('type', 'string', ['comment' => '配置类型'])
+            ->addColumn('title', 'string', ['comment' => '配置说明'])
+            ->addColumn('group', 'string', ['comment' => '配置分组'])
+            ->addColumn('value', 'text', ['null' => true, 'comment' => '配置值 - 文本,枚举,编辑器'])
+            ->addColumn('extra', 'string', ['null' => true, 'comment' => '配置值 - 数字,字符串,密码'])
+            ->addColumn('remark', 'string', ['null' => true, 'comment' => '配置说明'])
+            ->addColumn('status', 'integer', ['default' => 1, 'limit' => MysqlAdapter::INT_TINY, 'signed' => false,  'comment' => '状态'])
+            ->addColumn('sort', 'integer', ['default' => 1, 'limit' => MysqlAdapter::INT_TINY, 'signed' => false,  'comment' => '排序'])
+            ->addTimestamps()
+            ->addIndex(['type'])
+            ->addIndex(['group'])
+            ->addIndex(['name'], ['unique' => true])
+            ->create();
     }
 }

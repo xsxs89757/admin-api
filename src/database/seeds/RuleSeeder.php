@@ -16,6 +16,51 @@ class RuleSeeder extends AbstractSeed {
         $adminMenu = $this->table('admin_menu');
 
         $data = [
+            'name' => 'system',
+            'key' => 'system',
+            'introduction' => '系统设置',
+            'redirect' => '/system/config',
+            'icon' => 'ant-design:setting-filled',
+            'pid' => 0,
+            'sort' => 99,
+        ];
+
+        $adminMenu->insert($data)->saveData();
+
+        $systemId = $this->getAdapter()->getConnection()->lastInsertId();
+
+        $data = [
+            'name' => 'config',
+            'key' => 'system.config',
+            'introduction' => '系统设置',
+            'pid' => $systemId,
+        ];
+
+        $adminMenu->insert($data)->saveData();
+
+        $configId = $this->getAdapter()->getConnection()->lastInsertId();
+
+        $data = [
+            [
+                'name' => 'store',
+                'key' => 'system.config.store',
+                'introduction' => '保存',
+                'hidden' => 1,
+                'pid' => $configId,
+            ]
+        ];
+        $adminMenu->insert($data)->save();
+
+        $data = [
+            'name' => 'set',
+            'key' => 'system.configSet',
+            'introduction' => '配置管理',
+            'pid' => $systemId,
+        ];
+
+        $adminMenu->insert($data)->saveData();
+
+        $data = [
             'name' => 'users',
             'key' => 'adminUsers',
             'introduction' => '管理员',

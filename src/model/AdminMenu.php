@@ -61,7 +61,7 @@ class AdminMenu extends Model {
         $uid = AdminUser::getCurrentUserId();
 
         if ($uid == 1) {
-            $menus = self::orderBy('sort', 'asc')->orderBy('id', 'asc')->get();
+            $menus = self::orderBy('sort', 'asc')->orderBy('id', 'asc')->get()->toArray();
         } else {
             $rule = [];
             $permissions = Permission::getImplicitPermissionsForUser('adminUser_' . $uid);
@@ -72,10 +72,16 @@ class AdminMenu extends Model {
                 }
             }
 
-            $menus = self::whereIn('key', $rule)->orderBy('sort', 'asc')->orderBy('id', 'asc')->get();
+            $menus = self::whereIn('key', $rule)->orderBy('sort', 'asc')->orderBy('id', 'asc')->get()->toArray();
         }
 
-        $tree = self::getTree($menus->toArray(), $withHandle);
+        if (!$withHandle) {
+            $menus = array_filter($menus, function ($item) {
+                return $item['key'] !== 'system.configSet';
+            });
+        }
+
+        $tree = self::getTree($menus, $withHandle);
 
         if (!$withHandle) return $tree;
 

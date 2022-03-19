@@ -2,6 +2,7 @@
 
 namespace Qifen\WebmanAdmin\controller;
 
+use Carbon\Carbon;
 use Qifen\WebmanApiResponse\Code;
 use Qifen\WebmanApiResponse\ApiResponse;
 use Qifen\WebmanAdmin\exception\ApiErrorException;
@@ -98,5 +99,21 @@ class Base {
         $offset = ($page - 1) * $limit;
 
         return compact('page', 'limit', 'offset');
+    }
+
+    /**
+     * 获取日期路径
+     * 
+     * @param string $extension
+     * @param string $path
+     * @return string
+     */
+    protected function getDatePath(string $extension, string $path = '')
+    {
+        if (!empty($path) && substr($path, -1) != '/') $path .= '/';
+
+        $path .= Carbon::now()->format('Y/m/d/') . uniqid() . time() . '.' . $extension;
+
+        return $path;
     }
 }
