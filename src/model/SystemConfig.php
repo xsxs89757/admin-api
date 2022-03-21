@@ -310,7 +310,7 @@ class SystemConfig extends Model
         $cache = Redis::get(self::CACHE_KEY);
 
         if (!$cache) {
-            $config = self::select(['id', 'name', 'title', 'type', 'value'])
+            $list = self::select(['id', 'name', 'title', 'type', 'value'])
                 ->get()
                 ->map(function ($item) {
                     $item->value = self::getValue($item->type, $item->value);
@@ -318,6 +318,12 @@ class SystemConfig extends Model
                     return $item;
                 })
                 ->toArray();
+
+            $config = [];
+
+            foreach ($list as $item) {
+                $config[$item['name']] = $item;
+            }
 
             Redis::set(self::CACHE_KEY, json_encode($config, JSON_UNESCAPED_SLASHES));
         } else {
