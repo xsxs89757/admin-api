@@ -36,7 +36,7 @@ class StartAdminRoute{
             AdminRoute::post('/reset_password','Qifen\WebmanAdmin\controller\AuthController@resetPassword')->rule('resetPassword');
             AdminRoute::get('/menu_cache_clear','Qifen\WebmanAdmin\controller\UserController@clearMenuCache')->rule('clearMenuCache');
             AdminRoute::get('/config_map','Qifen\WebmanAdmin\controller\ConfigController@getMap')->rule('configMap');
-            AdminRoute::post('/upload','Qifen\WebmanAdmin\controller\UploadController@upload')->rule('upload');
+            AdminRoute::post('/config_upload','Qifen\WebmanAdmin\controller\UploadController@upload')->rule('configUpload');
         })->middleware([
             Auth::class,
             ActionLog::class,
