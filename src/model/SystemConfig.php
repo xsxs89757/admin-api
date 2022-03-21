@@ -151,7 +151,6 @@ class SystemConfig extends Model
             $config->group = $data['group'];
             $config->status = $data['status'];
             $config->sort = $data['sort'] ?? 1;
-            $config->extra = $data['extra'] ?? '';
             $config->remark = $data['remark'] ?? '';
             $config->extra = $isExtra ? $data['extra'] : '';
 
@@ -301,11 +300,11 @@ class SystemConfig extends Model
      * 获取配置
      *
      * @param string $key
-     * @return mixed|string|null
+     * @return mixed|null
      */
     public static function getConfig(string $key)
     {
-        if (empty($key)) return '';
+        if (empty($key)) return null;
 
         $cache = Redis::get(self::CACHE_KEY);
 
@@ -331,5 +330,38 @@ class SystemConfig extends Model
         }
 
         return $config[$key] ?? null;
+    }
+
+    /**
+     * 获取配置值
+     *
+     * @param string $key
+     * @return array|mixed|string|null
+     */
+    public static function getConfigValue(string $key)
+    {
+        $config = self::getConfig($key);
+
+        if (!$config) return null;
+
+        $value = $config['value'];
+
+        if ($config['type'] == 'oneimage' || $config['type'] == 'onefile') {
+            if (!empty($value)) {
+                return $value[0]['url'];
+            }
+
+            return '';
+        } else if ($config['type'] == '' || $config['type'] == '') {
+            $list = [];
+
+            foreach ($value as $item) {
+                $list[] = $item['url'];
+            }
+
+            return $list;
+        } else {
+            return $value;
+        }
     }
 }
