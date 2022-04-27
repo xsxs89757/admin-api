@@ -17,6 +17,8 @@ class AdminUser extends Model {
     const STATUS_DISABLED = 0;
     const STATUS_AVAILABLE = 1;
 
+    const MODEL_PATH = 'Qifen\WebmanAdmin\model\AdminUser';
+
     const SUPER_ADMIN_ROLE = [
         ['roleName' => '超级管理员', 'value' => '超级管理员'],
     ];
@@ -147,12 +149,12 @@ class AdminUser extends Model {
             // 赋权
             if ($id > 0) {
                 Permission::deleteUser(Roles::USER_PREFIX . $id);
-                AdminModelHasRoles::where('model_id', $sql->id)->where('model_type', 'app\admin\model\AdminUser')->delete();
+                AdminModelHasRoles::where('model_id', $sql->id)->where('model_type', self::MODEL_PATH)->delete();
             }
 
             foreach ($roles as $role) {
                 Permission::addRoleForUser(Roles::USER_PREFIX . $sql->id, Roles::ROLE_PREFIX . $role);
-                AdminModelHasRoles::create(['role_id' => $role, 'model_type' => 'app\admin\model\AdminUser', 'model_id' => $sql->id]);
+                AdminModelHasRoles::create(['role_id' => $role, 'model_type' => self::MODEL_PATH, 'model_id' => $sql->id]);
             }
 
             Db::commit();
@@ -185,7 +187,7 @@ class AdminUser extends Model {
             $user->delete();
 
             Permission::deleteUser(Roles::USER_PREFIX . $id);
-            AdminModelHasRoles::where('model_id', $id)->where('model_type', 'app\admin\model\AdminUser')->delete();
+            AdminModelHasRoles::where('model_id', $id)->where('model_type', self::MODEL_PATH)->delete();
 
             Db::commit();
         } catch (\Exception $exception) {

@@ -101,7 +101,7 @@ class Roles extends Model {
         }
 
         $ownIds = AdminModelHasRoles::where('model_id', $uid)
-            ->where('model_type', 'app\admin\model\AdminUser')
+            ->where('model_type', AdminUser::MODEL_PATH)
             ->pluck('role_id')
             ->toArray();
 
