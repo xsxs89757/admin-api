@@ -223,7 +223,7 @@ class Roles extends Model {
      */
     public static function del(int $id) {
         try {
-            $count = AdminModelHasRoles::where('role_id', $id)->where('model_type', 'Qifen\WebmanAdmin\model\AdminUser')->count();
+            $count = AdminModelHasRoles::where('role_id', $id)->where('model_type', AdminUser::MODEL_PATH)->count();
 
             if ($count > 0) {
                 throw new ApiErrorException('当前角色已分配给用户，无法删除');
