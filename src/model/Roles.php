@@ -203,7 +203,7 @@ class Roles extends Model {
             $role->saveOrFail();
 
             if ($id > 0) {
-                Permission::deleteRole(self::ROLE_PREFIX . $role->id);
+                Permission::removeFilteredPolicy(0, self::ROLE_PREFIX . $role->id);
             }
 
             foreach ($permissions as $permission) {
