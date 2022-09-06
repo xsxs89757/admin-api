@@ -352,7 +352,7 @@ class SystemConfig extends Model
             }
 
             return '';
-        } else if ($config['type'] == '' || $config['type'] == '') {
+        } else if ($config['type'] == 'multipleimage' || $config['type'] == 'multiplefile') {
             $list = [];
 
             foreach ($value as $item) {
