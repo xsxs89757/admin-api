@@ -74,7 +74,7 @@ class StartAdminRoute{
         })->middleware([
             Auth::class,
             config('plugin.qifen.admin.config.action_log', ActionLog::class),
-            Access::class,
+            config('plugin.qifen.admin.config.access', Access::class),
         ]);
     }
 }
