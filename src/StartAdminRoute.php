@@ -5,7 +5,6 @@ namespace Qifen\WebmanAdmin;
 use Webman\Route;
 use Qifen\Route\Route as AdminRoute;
 use Qifen\WebmanAdmin\middleware\Auth;
-use Qifen\WebmanAdmin\middleware\ActionLog;
 use Qifen\WebmanAdmin\middleware\Access;
 use Qifen\WebmanAdmin\middleware\Cors;
 
@@ -22,7 +21,7 @@ class StartAdminRoute{
          * 后台登录
          */
         AdminRoute::post('/admin/login', 'Qifen\WebmanAdmin\controller\AuthController@login')->middleware([
-            ActionLog::class,
+            config('plugin.qifen.admin.config.action_log'),
         ])->rule('login');
 
         /**
@@ -39,7 +38,7 @@ class StartAdminRoute{
             AdminRoute::post('/config_upload','Qifen\WebmanAdmin\controller\UploadController@upload')->rule('configUpload');
         })->middleware([
             Auth::class,
-            ActionLog::class,
+            config('plugin.qifen.admin.config.action_log'),
         ]);
 
         /**
@@ -73,7 +72,7 @@ class StartAdminRoute{
             AdminRoute::post('/logs_clear','Qifen\WebmanAdmin\controller\UserController@clearLogs')->rule('adminControllerLogs.clearAdminLogs');
         })->middleware([
             Auth::class,
-            ActionLog::class,
+            config('plugin.qifen.admin.config.action_log'),
             Access::class,
         ]);
     }
